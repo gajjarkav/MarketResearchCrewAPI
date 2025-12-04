@@ -3,6 +3,7 @@ from crewai_tools import SerperDevTool
 
 from config import settings
 from app.prompts import researcher, analyst, writer, editor
+from app.tools import NewsTool
 
 llm = LLM(
     api_key=settings.LLM_API_KEY,
@@ -10,7 +11,7 @@ llm = LLM(
     model=f"groq/{settings.MODEL_NAME}"
 )
 search_tool = SerperDevTool(api_key=settings.SERPER_API_KEY)
-
+news_tool = NewsTool()
 class MarketResearchAgent:
 
     def senior_research_agent(self):
@@ -18,7 +19,7 @@ class MarketResearchAgent:
             role=researcher.role(),
             goal=researcher.goal(),
             backstory=researcher.backstory(),
-            tools=[search_tool],
+            tools=[search_tool, news_tool],
             allow_delegation=False,
             llm=llm,
             verbose=True,

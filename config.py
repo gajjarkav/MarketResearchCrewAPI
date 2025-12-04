@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     LLM_API_BASE: Optional[str] = None
     MODEL_NAME: Optional[str] = None
     SERPER_API_KEY: Optional[str] = None
+    NEWS_API: Optional[str] = None
 
     class Config:
         env_file = '.env'
